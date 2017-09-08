@@ -1,0 +1,11 @@
+<h1>datas disponíveis - chuva observada cpteq</h1>
+
+<table>
+    <% @dates.each do |date| %>
+      <tr>
+        <td><%= date %></td>
+        <td><%= link_to 'csv', rain_path(date, format: "csv") %></td>
+        <td><%= link_to 'json', rain_path(date, format: "json") %></td>
+      </tr>
+    <% end %>
+</table>

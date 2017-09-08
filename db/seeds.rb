@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'csv'
+file = Rails.root.join("db", "seeds", "seeds.csv")
+csv = CSV.read(file)
+
+csv.each do |line|
+  a = Rain.new
+  a.date = Date.parse(line[0])
+  a.lon = line[1].to_f
+  a.lat = line[2].to_f
+  a.rain_late = line[3].to_f
+  a.save
+end
