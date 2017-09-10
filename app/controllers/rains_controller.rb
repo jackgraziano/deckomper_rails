@@ -21,30 +21,40 @@ class RainsController < ApplicationController
   end
 
   def create
-    puts params.inspect
     @chuva_observada = params[:chuva_observada]
+    array_chuva = []
     @chuva_observada.each do |chuva|
-      # chuva[:date], chuva[:lon]
-
-      # checa se registro existe
-      if Rain.find_by_date_and_lon_and_lat(Date.parse(chuva[:date]), chuva[:lon].to_f, chuva[:lat].to_f).nil?
-        # nao existe - cria registro
-        a = Rain.new
-        a.date = Date.parse(chuva[:date])
-        a.lat = chuva[:lat].to_f
-        a.lon = chuva[:lon].to_f
-        a.rain_late = chuva[:rain].to_f
-        a.save
-      else
-        # update
-        a = Rain.find_by_date_and_lon_and_lat(Date.parse(chuva[:date]), chuva[:lon].to_f, chuva[:lat].to_f)
-        a.date = Date.parse(chuva[:date])
-        a.lat = chuva[:lat].to_f
-        a.lon = chuva[:lon].to_f
-        a.rain_late = chuva[:rain].to_f
-        a.save
-      end
+      chuva[:rain_late] = chuva[:rain]
+      chuva.delete("rain")
+      array_chuva << chuva.to_hash
     end
+    puts '*'*100
+    p array_chuva
+    puts '*'*100
+    Rain.import array_chuva, validate: false
+
+    # @chuva_observada.each do |chuva|
+    #   # chuva[:date], chuva[:lon]
+
+    #   # checa se registro existe
+    #   if Rain.find_by_date_and_lon_and_lat(Date.parse(chuva[:date]), chuva[:lon].to_f, chuva[:lat].to_f).nil?
+    #     # nao existe - cria registro
+    #     a = Rain.new
+    #     a.date = Date.parse(chuva[:date])
+    #     a.lat = chuva[:lat].to_f
+    #     a.lon = chuva[:lon].to_f
+    #     a.rain_late = chuva[:rain].to_f
+    #     a.save
+    #   else
+    #     # update
+    #     a = Rain.find_by_date_and_lon_and_lat(Date.parse(chuva[:date]), chuva[:lon].to_f, chuva[:lat].to_f)
+    #     a.date = Date.parse(chuva[:date])
+    #     a.lat = chuva[:lat].to_f
+    #     a.lon = chuva[:lon].to_f
+    #     a.rain_late = chuva[:rain].to_f
+    #     a.save
+    #   end
+    # end
   end
 
 end
