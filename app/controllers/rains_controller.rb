@@ -2,7 +2,7 @@ class RainsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @dates = Rain.distinct.pluck(:date)
+    @dates = Rain.distinct.pluck(:date).sort.reverse
   end
 
   def show
