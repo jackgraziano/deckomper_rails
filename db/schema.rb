@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170908125900) do
+ActiveRecord::Schema.define(version: 20170910182945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "basins", force: :cascade do |t|
+    t.string   "bacia"
+    t.string   "sub_bacia"
+    t.float    "lon"
+    t.float    "lat"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "rains", force: :cascade do |t|
     t.date     "date"

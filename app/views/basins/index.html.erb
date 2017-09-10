@@ -1,0 +1,13 @@
+<h1>Bacias</h1>
+
+<h2>Grande</h2>
+<table class="table">
+  <% @grande.each do |ponto_grande| %>
+    <tr>
+      <td><%= Basin.where(bacia: "Grande", lat: ponto_grande.lat, lon: ponto_grande.lon).first.sub_bacia %></td>
+      <td><%= ponto_grande.lon %></td>
+      <td><%= ponto_grande.lat %></td>
+      <td><%= ponto_grande.rain_late %></td>
+    </tr>
+  <% end %>
+</table>
