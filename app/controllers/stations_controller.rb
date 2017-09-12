@@ -8,8 +8,6 @@ class StationsController < ApplicationController
     puts '*'*100
     array = []
     @stations.each do |station|
-      station[:rain] = station[:chuva].to_f
-      station.delete("chuva")
       array << station.to_hash
     end
     Station.import array, validate: false
