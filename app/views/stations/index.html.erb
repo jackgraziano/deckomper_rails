@@ -1,5 +1,3 @@
-<% @st.each do |k, v| %>
-
-<p> <%= k %>, <%= v %></p>
-
+<% @stations.each do |station| %>
+  <%= station.posto %>,<%= station.bacia %>,<%= station.rain %>,<%= station.date %><br />
 <% end %>

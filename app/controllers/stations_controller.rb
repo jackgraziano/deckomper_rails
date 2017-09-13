@@ -14,10 +14,7 @@ class StationsController < ApplicationController
   end
 
   def index
-    @st = Hash.new(0)
-    Station.all.each do |point|
-      @st[point.date.to_s.to_sym] += 1
-    end
+    @stations = Station.all
   end
 
 end
