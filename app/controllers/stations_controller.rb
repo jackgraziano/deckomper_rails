@@ -13,4 +13,11 @@ class StationsController < ApplicationController
     Station.import array, validate: false
   end
 
+  def index
+    @st = Hash.new(0)
+    Station.all.each do |point|
+      @st[point.date.to_s.to_sym] += 1
+    end
+  end
+
 end
