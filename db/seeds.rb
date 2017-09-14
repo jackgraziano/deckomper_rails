@@ -32,7 +32,7 @@ require 'csv'
 
 files = Dir.glob("#{Rails.root}/db/seeds/csv/**/*")
 files.each do |file|
-  file = Rails.root.join("db", "seeds", "csv", file[48..-1])
+  file = Rails.root.join("db", "seeds", "csv", file[18..-1])
   puts file
   chuva_observada = CSV.table(file).map{ |row| row.to_hash }
   array_chuva = []
