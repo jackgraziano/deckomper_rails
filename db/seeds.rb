@@ -31,8 +31,9 @@ require 'csv'
 # end
 
 files = Dir.glob("#{Rails.root}/db/seeds/csv/**/*")
-files[0..2].each do |file|
-  file = Rails.root.join("db", "seeds", "csv", "MERGE_GPM_late_2016100112_ETA.csv")
+files.each do |file|
+  file = Rails.root.join("db", "seeds", "csv", file[48..-1])
+  puts file
   chuva_observada = CSV.table(file).map{ |row| row.to_hash }
   array_chuva = []
   chuva_observada.each do |chuva|
