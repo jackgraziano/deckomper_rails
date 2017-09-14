@@ -18,14 +18,25 @@ require 'csv'
 #   a.save
 # end
 
-file = Rails.root.join("db", "seeds", "bacia_grande.csv")
-csv = CSV.read(file)
+# file = Rails.root.join("db", "seeds", "bacia_grande.csv")
+# csv = CSV.read(file)
 
-csv.each do |line|
-  a = Basin.new
-  a.bacia = line[0]
-  a.sub_bacia = line[1]
-  a.lon = line[2].to_f
-  a.lat = line[3].to_f
-  a.save
+# csv.each do |line|
+#   a = Basin.new
+#   a.bacia = line[0]
+#   a.sub_bacia = line[1]
+#   a.lon = line[2].to_f
+#   a.lat = line[3].to_f
+#   a.save
+# end
+
+files = Dir.glob("#{Rails.root}/db/seeds/csv/**/*")
+files[0..2].each do |file|
+  file = Rails.root.join("db", "seeds", "csv", "MERGE_GPM_late_2016100112_ETA.csv")
+  chuva_observada = CSV.table(file).map{ |row| row.to_hash }
+  array_chuva = []
+  chuva_observada.each do |chuva|
+    array_chuva << {date: chuva[:date], lon: chuva[:lon], lat: chuva[:lat], rain_late: chuva[:rain]}
+  end
+  Rain.import array_chuva, validate: false
 end
