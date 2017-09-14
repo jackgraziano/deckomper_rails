@@ -1,0 +1,4 @@
+data,lon,lat,chuva_late
+<% @rain.each do |rain| %>
+<%= rain.date %>,<%= rain.lon %>,<%= rain.lat %>,<%= rain.rain_late %>
+<% end %>

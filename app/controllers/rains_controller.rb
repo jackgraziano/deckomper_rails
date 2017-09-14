@@ -5,6 +5,102 @@ class RainsController < ApplicationController
     @dates = Rain.distinct.pluck(:date).sort.reverse
   end
 
+  def grande
+    grande = [
+              { lat: -21.40, lon: -44.20 },
+              { lat: -21.40, lon: -44.60 },
+              { lat: -21.80, lon: -44.20 },
+              { lat: -21.80, lon: -44.60 },
+              { lat: -22.20, lon: -44.60 },
+              { lat: -21.00, lon: -43.80 },
+              { lat: -21.00, lon: -44.20 },
+              { lat: -21.00, lon: -44.60 },
+              { lat: -21.00, lon: -45.00 },
+              { lat: -21.40, lon: -43.80 },
+              { lat: -21.80, lon: -45.00 },
+              { lat: -21.80, lon: -45.40 },
+              { lat: -22.20, lon: -45.00 },
+              { lat: -22.20, lon: -45.40 },
+              { lat: -21.80, lon: -45.80 },
+              { lat: -22.20, lon: -45.80 },
+              { lat: -22.20, lon: -46.20 },
+              { lat: -22.60, lon: -45.40 },
+              { lat: -22.60, lon: -45.80 },
+              { lat: -20.60, lon: -45.40 },
+              { lat: -20.60, lon: -45.80 },
+              { lat: -20.60, lon: -46.20 },
+              { lat: -21.00, lon: -45.40 },
+              { lat: -21.00, lon: -45.80 },
+              { lat: -21.00, lon: -46.20 },
+              { lat: -21.40, lon: -45.00 },
+              { lat: -21.40, lon: -45.40 },
+              { lat: -21.40, lon: -45.80 },
+              { lat: -21.40, lon: -46.20 },
+              { lat: -21.40, lon: -46.60 },
+              { lat: -21.80, lon: -46.20 },
+              { lat: -20.60, lon: -47.40 },
+              { lat: -20.60, lon: -47.80 },
+              { lat: -21.00, lon: -47.00 },
+              { lat: -21.00, lon: -47.40 },
+              { lat: -19.80, lon: -47.40 },
+              { lat: -19.80, lon: -47.80 },
+              { lat: -19.80, lon: -48.20 },
+              { lat: -20.20, lon: -47.00 },
+              { lat: -20.20, lon: -47.40 },
+              { lat: -20.20, lon: -47.80 },
+              { lat: -20.20, lon: -48.20 },
+              { lat: -20.60, lon: -46.60 },
+              { lat: -20.60, lon: -47.00 },
+              { lat: -21.00, lon: -46.60 },
+              { lat: -21.80, lon: -46.60 },
+              { lat: -21.40, lon: -47.80 },
+              { lat: -21.40, lon: -48.20 },
+              { lat: -21.80, lon: -47.40 },
+              { lat: -21.80, lon: -47.80 },
+              { lat: -22.20, lon: -46.60 },
+              { lat: -22.20, lon: -47.00 },
+              { lat: -22.20, lon: -47.40 },
+              { lat: -22.60, lon: -46.20 },
+              { lat: -22.60, lon: -46.60 },
+              { lat: -19.80, lon: -48.60 },
+              { lat: -20.20, lon: -48.60 },
+              { lat: -20.20, lon: -49.00 },
+              { lat: -20.60, lon: -48.20 },
+              { lat: -20.60, lon: -48.60 },
+              { lat: -21.00, lon: -47.80 },
+              { lat: -21.00, lon: -48.20 },
+              { lat: -21.40, lon: -47.00 },
+              { lat: -21.40, lon: -47.40 },
+              { lat: -21.80, lon: -47.00 },
+              { lat: -19.80, lon: -49.00 },
+              { lat: -19.80, lon: -49.40 },
+              { lat: -19.80, lon: -49.80 },
+              { lat: -19.80, lon: -50.20 },
+              { lat: -20.20, lon: -49.40 },
+              { lat: -20.20, lon: -49.80 },
+              { lat: -20.20, lon: -50.20 },
+              { lat: -20.60, lon: -49.00 },
+              { lat: -20.60, lon: -49.40 },
+              { lat: -21.00, lon: -48.60 },
+              { lat: -21.00, lon: -49.00 },
+            ]
+
+    lat = []
+    lon = []
+    grande.each do |point|
+      lat << point[:lat]
+      lon << point[:lon]
+    end
+    @rain = Rain.where(lon: lon, lat: lat)
+    respond_to do |format|
+      format.csv do
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers['Content-Disposition'] = "attachment; filename=grande.csv"
+        render :template => "rains/grande.csv.erb"
+      end
+    end
+  end
+
   def show
     date = params[:id].to_s
     @rains = Rain.where(date: Date.parse(date))

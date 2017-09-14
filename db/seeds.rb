@@ -30,9 +30,41 @@ require 'csv'
 #   a.save
 # end
 
-files = Dir.glob("#{Rails.root}/db/seeds/csv/**/*")
+files = [
+  "MERGE_GPM_late_2016120112_ETA.csv",
+  "MERGE_GPM_late_2016120212_ETA.csv",
+  "MERGE_GPM_late_2016120312_ETA.csv",
+  "MERGE_GPM_late_2016120412_ETA.csv",
+  "MERGE_GPM_late_2016120512_ETA.csv",
+  "MERGE_GPM_late_2016120612_ETA.csv",
+  "MERGE_GPM_late_2016120712_ETA.csv",
+  "MERGE_GPM_late_2016120812_ETA.csv",
+  "MERGE_GPM_late_2016120912_ETA.csv",
+  "MERGE_GPM_late_2016121012_ETA.csv",
+  "MERGE_GPM_late_2016121112_ETA.csv",
+  "MERGE_GPM_late_2016121212_ETA.csv",
+  "MERGE_GPM_late_2016121312_ETA.csv",
+  "MERGE_GPM_late_2016121412_ETA.csv",
+  "MERGE_GPM_late_2016121512_ETA.csv",
+  "MERGE_GPM_late_2016121612_ETA.csv",
+  "MERGE_GPM_late_2016121712_ETA.csv",
+  "MERGE_GPM_late_2016121812_ETA.csv",
+  "MERGE_GPM_late_2016121912_ETA.csv",
+  "MERGE_GPM_late_2016122012_ETA.csv",
+  "MERGE_GPM_late_2016122112_ETA.csv",
+  "MERGE_GPM_late_2016122212_ETA.csv",
+  "MERGE_GPM_late_2016122312_ETA.csv",
+  "MERGE_GPM_late_2016122412_ETA.csv",
+  "MERGE_GPM_late_2016122512_ETA.csv",
+  "MERGE_GPM_late_2016122612_ETA.csv",
+  "MERGE_GPM_late_2016122712_ETA.csv",
+  "MERGE_GPM_late_2016122812_ETA.csv",
+  "MERGE_GPM_late_2016122912_ETA.csv",
+  "MERGE_GPM_late_2016123012_ETA.csv",
+  "MERGE_GPM_late_2016123112_ETA.csv",
+]
 files.each do |file|
-  file = Rails.root.join("db", "seeds", "csv", file[18..-1])
+  file = Rails.root.join("db", "seeds", "csv", file)
   puts file
   chuva_observada = CSV.table(file).map{ |row| row.to_hash }
   array_chuva = []
